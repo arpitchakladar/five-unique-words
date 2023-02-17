@@ -15,7 +15,7 @@ static void _get_possible_words(std::array<Word*, 4> last_words, std::vector<std
 				current_result[i] = last_words[i];
 			}
 			current_result[4] = current_word;
-			results.push_back(current_result);
+			results.push_back(std::move(current_result));
 		}
 	}
 }
