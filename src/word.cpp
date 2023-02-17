@@ -1,13 +1,14 @@
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "word.hpp"
 
 Word::Word(std::vector<std::string>& word_list, size_t index)
 	: _word_list(word_list), _index(index)
 {
-	for (int j = _index; j < _word_list.size(); j++) {
-		if (is_used(std::array { _index } )) {
+	for (size_t j = _index; j < _word_list.size(); j++) {
+		if (!is_used(std::array { j } )) {
 			_next_words.push_back(j);
 		}
 	}
