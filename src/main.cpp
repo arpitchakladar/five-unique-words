@@ -28,34 +28,11 @@ std::vector<Word> get_word_list() {
 	return word_list;
 }
 
-template<size_t N>
-void print_words(const std::array<Word*, N>& words) {
-	std::cout << "{ ";
-	for (size_t i = 0; i < N; i++) {
-		std::cout << words[i]->get_text();
-		if (i < N - 1) {
-			std::cout << ", ";
-		}
-	}
-	std::cout << " }" << std::endl;
-}
-
-void print_words(const std::vector<Word*>& words) {
-	std::cout << "{ ";
-	for (size_t i = 0; i < words.size(); i++) {
-		std::cout << words[i]->get_text();
-		if (i < words.size() - 1) {
-			std::cout << ", ";
-		}
-	}
-	std::cout << " }" << std::endl;
-}
-
 int main(int argc, char *argv[]) {
 	std::vector<Word> word_list = get_word_list();
 	std::vector<std::array<Word*, 5>> results = get_possible_words(word_list);
 	for (size_t i = 0; i < results.size(); i++) {
-		print_words(results[i]);
+		Word::print_words(results[i]);
 	}
 	std::cout << "Total = " << results.size() << std::endl;
 	return EXIT_SUCCESS;

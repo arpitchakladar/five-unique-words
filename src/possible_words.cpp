@@ -5,7 +5,7 @@
 #include "limiting.hpp"
 #include "possible_words.hpp"
 
-void _get_possible_words(std::array<Word*, 4> last_words, std::vector<std::array<Word*, 5>>& results) {
+static void _get_possible_words(std::array<Word*, 4> last_words, std::vector<std::array<Word*, 5>>& results) {
 	Limiting<3> limiting(last_words);
 	for (size_t i = 0; i < limiting.get_next_words().size(); i++) {
 		Word* current_word = limiting.get_next_words()[i];
@@ -21,7 +21,7 @@ void _get_possible_words(std::array<Word*, 4> last_words, std::vector<std::array
 }
 
 template<size_t N>
-void _get_possible_words(std::array<Word*, N> last_words, std::vector<std::array<Word*, 5>>& results) {
+static void _get_possible_words(std::array<Word*, N> last_words, std::vector<std::array<Word*, 5>>& results) {
 	Limiting<N - 1> limiting(last_words);
 	for (size_t i = 0; i < limiting.get_next_words().size(); i++) {
 		Word* current_word = limiting.get_next_words()[i];
@@ -36,7 +36,7 @@ void _get_possible_words(std::array<Word*, N> last_words, std::vector<std::array
 	}
 }
 
-void _get_possible_words(std::array<Word*, 1> last_words, std::vector<std::array<Word*, 5>>& results) {
+static void _get_possible_words(std::array<Word*, 1> last_words, std::vector<std::array<Word*, 5>>& results) {
 	Word *word = last_words[0];
 	for (size_t i = 0; i < word->get_next_words().size(); i++) {
 		_get_possible_words(std::array<Word*, 2> { word, word->get_next_words()[i] }, results);

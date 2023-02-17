@@ -1,6 +1,7 @@
 #include <vector>
 #include <array>
 
+#include "word.hpp"
 #include "limiting.hpp"
 
 template<size_t N>
