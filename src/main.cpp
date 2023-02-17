@@ -19,6 +19,9 @@ std::vector<Word> get_word_list() {
 				word_list.push_back(Word(std::move(line)));
 			}
 		}
+		for (size_t i = 0; i < word_list.size(); i++) {
+			word_list[i].set_next_words(word_list);
+		}
 	} else {
 		std::cout << "FAILED: Failed to open file." << std::endl;
 	}
@@ -34,7 +37,7 @@ void print_words(const std::array<Word*, N>& words) {
 			std::cout << ", ";
 		}
 	}
-	std::cout << " } " << std::endl;
+	std::cout << " }" << std::endl;
 }
 
 void print_words(const std::vector<Word*>& words) {
@@ -45,15 +48,15 @@ void print_words(const std::vector<Word*>& words) {
 			std::cout << ", ";
 		}
 	}
-	std::cout << " } " << std::endl;
+	std::cout << " }" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
 	std::vector<Word> word_list = get_word_list();
-	for (size_t i = 0; i < word_list.size(); i++) {
-		word_list[i].set_next_words(word_list);
+	std::vector<std::array<Word*, 5>> results = get_possible_words(word_list);
+	for (size_t i = 0; i < results.size(); i++) {
+		print_words(results[i]);
 	}
-	print_words(word_list[0].get_next_words());
-	get_possible_words(word_list);
+	std::cout << "Total = " << results.size() << std::endl;
 	return EXIT_SUCCESS;
 }
