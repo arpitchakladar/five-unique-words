@@ -6,18 +6,17 @@
 
 class Word {
 	private:
-		size_t _index;
-		std::vector<size_t> _next_words;
-		std::vector<std::string>& _word_list;
+		std::string _text;
+		std::vector<Word*> _next_words;
 
 	public:
-		Word(std::vector<std::string>&, size_t);
+		Word(std::string&&);
 		~Word() = default;
 		template<size_t N>
-		bool is_used(std::array<size_t, N>);
+		bool is_used(std::array<Word*, N>) const;
+		void set_next_words(std::vector<Word>&);
 
 	public:
-		inline const std::vector<size_t>& get_next_words() const { return _next_words; }
-		inline size_t get_index() const { return _index; }
-		inline const std::string& get_word() const { return _word_list[_index]; }
+		inline const std::vector<Word*>& get_next_words() const { return _next_words; }
+		inline const std::string& get_word() const { return _text; }
 };
