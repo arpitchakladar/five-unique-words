@@ -18,5 +18,5 @@ class Word {
 
 	public:
 		inline const std::vector<Word*>& get_next_words() const { return _next_words; }
-		inline const std::string& get_word() const { return _text; }
+		inline const std::string& get_text() const { return _text; }
 };

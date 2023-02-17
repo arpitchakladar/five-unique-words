@@ -16,7 +16,7 @@ Limiting<N>::Limiting(std::array<Word*, N + 1> words) {
 	}
 	for (size_t i = 0, j = 0; j < N + 1; j++) {
 		if (j != excluded_word_index) {
-			_remaining_words[i] = words[j];
+			_unchecked_words[i] = words[j];
 			i++;
 		}
 	}

@@ -6,6 +6,7 @@
 
 #include "word.hpp"
 #include "limiting.hpp"
+#include "possible_words.hpp"
 
 std::vector<Word> get_word_list() {
 	std::ifstream file("res/words.txt");
@@ -24,14 +25,35 @@ std::vector<Word> get_word_list() {
 	return word_list;
 }
 
+template<size_t N>
+void print_words(const std::array<Word*, N>& words) {
+	std::cout << "{ ";
+	for (size_t i = 0; i < N; i++) {
+		std::cout << words[i]->get_text();
+		if (i < N - 1) {
+			std::cout << ", ";
+		}
+	}
+	std::cout << " } " << std::endl;
+}
+
+void print_words(const std::vector<Word*>& words) {
+	std::cout << "{ ";
+	for (size_t i = 0; i < words.size(); i++) {
+		std::cout << words[i]->get_text();
+		if (i < words.size() - 1) {
+			std::cout << ", ";
+		}
+	}
+	std::cout << " } " << std::endl;
+}
+
 int main(int argc, char *argv[]) {
 	std::vector<Word> word_list = get_word_list();
 	for (size_t i = 0; i < word_list.size(); i++) {
 		word_list[i].set_next_words(word_list);
 	}
-	std::cout << word_list[2].get_next_words().size() << std::endl;
-	std::cout << word_list[5].get_next_words().size() << std::endl;
-	std::cout << word_list[7].get_next_words().size() << std::endl;
-	std::cout << Limiting<2>({ &word_list[2], &word_list[5], &word_list[7] }).get_next_words().size() << std::endl;
+	print_words(word_list[0].get_next_words());
+	get_possible_words(word_list);
 	return EXIT_SUCCESS;
 }

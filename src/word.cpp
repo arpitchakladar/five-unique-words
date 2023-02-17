@@ -32,3 +32,8 @@ void Word::set_next_words(std::vector<Word>& word_list) {
 		}
 	}
 }
+
+template bool Word::is_used<4>(std::array<Word*, 4>) const;
+template bool Word::is_used<3>(std::array<Word*, 3>) const;
+template bool Word::is_used<2>(std::array<Word*, 2>) const;
+template bool Word::is_used<1>(std::array<Word*, 1>) const;
